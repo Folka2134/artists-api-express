@@ -1,4 +1,4 @@
-const artist = [
+const artists = [
   {
     alias: "Chance the Rapper",
     name: "Chancelor Bennett",
@@ -25,4 +25,4 @@ const artist = [
   },
 ];
 
-module.exports = { artist };
+module.exports = { artists };
