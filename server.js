@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const { artists } = require("./artists");
 
 const app = express();
