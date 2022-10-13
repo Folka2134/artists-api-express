@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const routes = require("./routes/routes");
 const Model = require("./model/model");
@@ -8,6 +9,7 @@ const { artists } = require("./artists");
 // Express setup
 const app = express();
 const PORT = 4000;
+const jsonParser = bodyParser.json();
 
 // MONGODB Setup
 require("dotenv").config();
@@ -28,6 +30,7 @@ database.once("connected", () => {
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api", routes);
 
 // Routes

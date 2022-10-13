@@ -24,8 +24,8 @@ router.post("/post", async (req, res) => {
   });
 
   try {
-    const saveArtist = await artist.save();
-    res.status(200).json(saveArtist);
+    await artist.save();
+    res.redirect("/");
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
