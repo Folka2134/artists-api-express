@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const routes = require("./routes/routes");
+const Model = require("./model/model");
 const { artists } = require("./artists");
 
 // Express setup
@@ -30,9 +31,13 @@ app.use(express.json());
 app.use("/api", routes);
 
 // Routes
-app.get("/", (req, res) => {
-  const data = artists;
-  res.render("index.ejs", { info: data });
+app.get("/", async (req, res) => {
+  try {
+    const data = await Model.find();
+    res.render("index.ejs", { info: data });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 app.listen(PORT, () => {
