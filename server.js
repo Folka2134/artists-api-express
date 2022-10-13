@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const { artists } = require("./artists");
-require("dotenv").config();
 
+const routes = require("./routes/routes");
+const { artists } = require("./artists");
+
+// Express setup
 const app = express();
 const PORT = 4000;
 
-// MONGODB STUFF
+// MONGODB Setup
+require("dotenv").config();
 const mongoString = process.env.DATABASE_URL;
 
 mongoose.connect(mongoString);
@@ -24,6 +27,7 @@ database.once("connected", () => {
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.json());
+app.use("/api", routes);
 
 // Routes
 app.get("/", (req, res) => {
