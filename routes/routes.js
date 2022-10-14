@@ -36,6 +36,7 @@ router.post("/post", async (req, res) => {
 router.delete("/deleteArtist", async (req, res) => {
   try {
     await Model.deleteOne({ alias: req.body.alias });
+    res.json("Artist deleted successfully");
   } catch (error) {
     console.log(error);
   }

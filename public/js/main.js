@@ -17,8 +17,8 @@ async function deleteArtist() {
         name: name,
       }),
     });
-    const data = await response.json();
-    console.log(data);
+    await response.json();
+    location.reload();
   } catch (error) {
     console.log(error);
   }
