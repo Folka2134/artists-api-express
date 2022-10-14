@@ -9,7 +9,7 @@ async function deleteArtist() {
   const alias = this.parentNode.childNodes[1].innerText;
   const name = this.parentNode.childNodes[3].innerText;
   try {
-    const response = await fetch("api/deleteArtist", {
+    await fetch("api/deleteArtist", {
       method: "delete",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -17,7 +17,6 @@ async function deleteArtist() {
         name: name,
       }),
     });
-    await response.json();
     location.reload();
   } catch (error) {
     console.log(error);
