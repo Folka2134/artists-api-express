@@ -1,3 +1,4 @@
+const { response } = require("express");
 const express = require("express");
 const Model = require("../model/model");
 
@@ -5,7 +6,7 @@ const router = express.Router();
 
 //// Endpoints
 
-//Get all Method
+// GET routes
 router.get("/getAll", async (req, res) => {
   try {
     const data = await Model.find();
@@ -15,7 +16,7 @@ router.get("/getAll", async (req, res) => {
   }
 });
 
-// POST route
+// POST routes
 router.post("/post", async (req, res) => {
   const artist = new Model({
     alias: req.body.alias,
@@ -28,6 +29,15 @@ router.post("/post", async (req, res) => {
     res.redirect("/");
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+// DELETE routes
+router.delete("/deleteArtist", async (req, res) => {
+  try {
+    await Model.deleteOne({ alias: req.body.alias });
+  } catch (error) {
+    console.log(error);
   }
 });
 
