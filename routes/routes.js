@@ -1,4 +1,3 @@
-const { response } = require("express");
 const express = require("express");
 const Model = require("../model/model");
 
@@ -29,6 +28,31 @@ router.post("/post", async (req, res) => {
     res.redirect("/");
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+//PUT routes
+router.put("/addLike", async (req, res) => {
+  try {
+    const data = await Model.updateOne(
+      {
+        alias: req.body.alias,
+        name: req.body.name,
+        likes: req.body.likes,
+      },
+      {
+        $set: {
+          likes: req.body.likes + 1,
+        },
+      },
+      {
+        sort: { _id: -1 },
+        upsert: true,
+      }
+    );
+    res.json(data);
+  } catch (errors) {
+    console.log(errors);
   }
 });
 
